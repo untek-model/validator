@@ -1,0 +1,21 @@
+{
+  "name": "untek-model/validator",
+  "type": "extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Zn Developer",
+      "email": "zndev@ya.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "symfony/validator": "^4.4|^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Untek\\Model\\Validator\\": "src",
+      "Untek\\Model\\Validator\\Tests\\": "tests"
+    }
+  }
+}
