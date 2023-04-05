@@ -15,5 +15,14 @@ return static function (ContainerConfigurator $configurator): void {
             [
                 service(ContainerInterface::class),
             ]
+        )
+        ->call(
+            'setValidators',
+            [
+                [
+                    \Untek\Model\Validator\Libs\Validators\ClassMetadataValidator::class,
+//                \Untek\Lib\Components\DynamicEntity\Libs\Validators\DynamicEntityValidator::class,
+                ],
+            ]
         );
 };
