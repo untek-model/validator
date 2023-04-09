@@ -10,6 +10,7 @@ return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services();
     $parameters = $configurator->parameters();
 
+    $services->set(\Symfony\Component\Validator\ValidatorBuilder::class, \Symfony\Component\Validator\ValidatorBuilder::class);
     $services->set(ChainValidator::class, ChainValidator::class)
         ->args(
             [
