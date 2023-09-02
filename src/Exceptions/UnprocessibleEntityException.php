@@ -9,7 +9,7 @@ use Untek\Core\Collection\Interfaces\Enumerable;
 use Untek\Core\Collection\Libs\Collection;
 use Untek\Model\Validator\Entities\ValidationErrorEntity;
 
-DeprecateHelper::softThrow();
+//DeprecateHelper::softThrow();
 
 /**
  * Class UnprocessibleEntityException
