@@ -4,6 +4,7 @@ namespace Untek\Model\Validator\Exceptions;
 
 use Exception;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class UnprocessableEntityException extends Exception
@@ -23,5 +24,14 @@ class UnprocessableEntityException extends Exception
     {
         $this->violations = $violations;
         return $this;
+    }
+
+    public static function create($message, ?string $messageTemplate, array $parameters, $root, ?string $propertyPath, $invalidValue, int $plural = null, string $code = null): self
+    {
+        $unprocessable = new UnprocessableEntityException();
+        $unprocessable->setViolations(new ConstraintViolationList([
+            new ConstraintViolation($message, $messageTemplate, $parameters, $root, $propertyPath, $invalidValue),
+        ]));
+        throw $unprocessable;
     }
 }
