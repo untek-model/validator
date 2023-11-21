@@ -34,4 +34,13 @@ class UnprocessableEntityException extends Exception
         ]));
         throw $unprocessable;
     }
+
+    public static function throwException($message, ?string $propertyPath, ?string $messageTemplate = null, array $parameters = [], $root = null, $invalidValue = null, int $plural = null, string $code = null): void
+    {
+        $unprocessable = new UnprocessableEntityException();
+        $unprocessable->setViolations(new ConstraintViolationList([
+            new ConstraintViolation($message, $messageTemplate, $parameters, $root, $propertyPath, $invalidValue),
+        ]));
+        throw $unprocessable;
+    }
 }
