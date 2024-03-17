@@ -9,7 +9,7 @@ use Untek\Model\Validator\Interfaces\ValidatorInterface;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $configurator): void {
-    $services = $configurator->services();
+    $services = $configurator->services()->defaults()->public();
     $parameters = $configurator->parameters();
 
     $services->set(ValidatorBuilder::class, ValidatorBuilder::class);
