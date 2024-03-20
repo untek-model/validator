@@ -38,6 +38,16 @@ abstract class AbstractObjectValidator
         }
     }
 
+    public function validateAttributes($value): void
+    {
+        $violations = $this->validateObject($value, $this->getConstraint());
+        if ($violations->count()) {
+            $exception = new UnprocessableEntityException();
+            $exception->setViolations($violations);
+            throw $exception;
+        }
+    }
+
     protected function validateObject($value, $constraints = null, $groups = null): ConstraintViolationList
     {
         $validator = $this->createValidator();
