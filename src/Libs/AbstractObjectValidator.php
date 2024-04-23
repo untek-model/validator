@@ -18,7 +18,7 @@ use Untek\Model\Validator\Exceptions\UnprocessableEntityException;
 abstract class AbstractObjectValidator
 {
 
-    private ?TranslatorInterface $translator = null;
+    protected ?TranslatorInterface $translator = null;
 
     public function __construct(?TranslatorInterface $translator = null)
     {
