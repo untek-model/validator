@@ -12,13 +12,21 @@ use Symfony\Component\Validator\Context\ExecutionContext;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\ValidatorBuilder;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Model\Validator\Exceptions\UnprocessableEntityException;
 
 abstract class AbstractObjectValidator
 {
 
-    public function __construct(private ?TranslatorInterface $translator = null)
+    private ?TranslatorInterface $translator = null;
+
+    public function __construct(?TranslatorInterface $translator = null)
     {
+        if($translator == null) {
+            // todo: избавиться от этого после внедрения зависимости в валидаторы
+            $translator = ContainerHelper::getContainer()->get(TranslatorInterface::class);
+        }
+        $this->translator = $translator;
     }
 
     abstract public function getConstraint(): Constraint;
@@ -52,7 +60,7 @@ abstract class AbstractObjectValidator
     {
         $validator = $this->createValidator();
         if (isset($this->translator)) {
-            $contextualValidator = $validator->inContext(new ExecutionContext($validator, null, $this->translator));
+            $contextualValidator = $validator->inContext(new ExecutionContext($validator, $value, $this->translator));
             $contextualValidator->validate($value, $constraints, $groups);
             $violations = $contextualValidator->getViolations();
         } else {
