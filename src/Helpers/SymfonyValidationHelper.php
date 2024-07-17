@@ -12,6 +12,7 @@ use Untek\Core\Collection\Interfaces\Enumerable;
 use Untek\Core\Collection\Libs\Collection;
 use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Model\Validator\Entities\ValidationErrorEntity;
+use Untek\Model\Validator\Exceptions\UnprocessableEntityException;
 use Untek\Model\Validator\Interfaces\ValidationByMetadataInterface;
 
 class SymfonyValidationHelper
@@ -20,15 +21,18 @@ class SymfonyValidationHelper
     /**
      * @return array | \Untek\Core\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
      */
-    public static function validate(ValidationByMetadataInterface $entity): Enumerable
+    public static function validate(ValidationByMetadataInterface $entity): ConstraintViolationList
     {
         $validator = self::createValidator();
         /** @var ConstraintViolationList $violationsList */
         $violationsList = $validator->validate($entity);
-        if ($violationsList->count()) {
+        /*if ($violationsList->count()) {
             $violations = (array)$violationsList->getIterator();
-        }
-        return self::prepareUnprocessible2($violationsList);
+        }*/
+
+        
+        
+        return $violationsList;
 //        return self::validateByMetadata($data);
     }
 
