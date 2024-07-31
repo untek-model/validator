@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\ValidatorBuilder;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -59,19 +60,27 @@ abstract class AbstractObjectValidator
     protected function validateObject($value, $constraints = null, $groups = null): ConstraintViolationList
     {
         $validator = $this->createValidator();
-        if (isset($this->translator)) {
-            $contextualValidator = $validator->inContext(new ExecutionContext($validator, $value, $this->translator));
-            $contextualValidator->validate($value, $constraints, $groups);
-            $violations = $contextualValidator->getViolations();
+        $violations = $validator->validate($value, $constraints, $groups);
+        /*if (isset($this->translator)) {
+            $validator = $validatorBuilder->getValidator();
+            $violations = $validator->validate($value, $constraints, $groups);
+//            $validator = $validator->inContext(new ExecutionContext($validator, $value, $this->translator));
+//            $validator->validate($value, $constraints, $groups);
+//            $violations = $validator->getViolations();
         } else {
             $violations = $validator->validate($value, $constraints, $groups);
-        }
+        }*/
         return $violations;
     }
 
     private function createValidator(): ValidatorInterface
     {
-        $validatorBuilder = new ValidatorBuilder();
+//        $validatorBuilder = new ValidatorBuilder();
+        $validatorBuilder = Validation::createValidatorBuilder();
+        if (isset($this->translator)) {
+            $validatorBuilder->setTranslator($this->translator);
+            $validatorBuilder->setTranslationDomain('validators');
+        }
         return $validatorBuilder->getValidator();
     }
 
