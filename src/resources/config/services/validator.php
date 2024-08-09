@@ -12,7 +12,7 @@ return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services()->defaults()->public();
     $parameters = $configurator->parameters();
 
-    $services->set(ValidatorBuilder::class, ValidatorBuilder::class);
+//    $services->set(ValidatorBuilder::class, ValidatorBuilder::class);
     $services->alias(ValidatorInterface::class, ChainValidator::class);
     $services->set(ChainValidator::class, ChainValidator::class)
         ->args(
