@@ -24,6 +24,7 @@ class ValidationHelper
      */
     public static function validateValue($value, array $rules): ConstraintViolationList
     {
+        DeprecateHelper::hardThrow();
         $validator = SymfonyValidationHelper::createValidator();
         $violations = $validator->validate($value, $rules);
         return $violations;
