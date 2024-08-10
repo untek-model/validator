@@ -9,17 +9,15 @@ use Untek\Model\Validator\Interfaces\ValidatorInterface;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $configurator): void {
-    $services = $configurator->services()->defaults()->public();
+    $services = $configurator->services()->defaults()->public()->autowire();
     $parameters = $configurator->parameters();
 
 //    $services->set(ValidatorBuilder::class, ValidatorBuilder::class);
     $services->alias(ValidatorInterface::class, ChainValidator::class);
-    $services->set(ChainValidator::class, ChainValidator::class)
-        ->args(
-            [
-                service(ContainerInterface::class),
-            ]
-        )
+    $services->set(ChainValidator::class)
+        /*->args([
+            service(ContainerInterface::class),
+        ])*/
         ->call(
             'setValidators',
             [
