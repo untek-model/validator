@@ -7,7 +7,7 @@ use Untek\Model\Entity\Interfaces\EntityIdInterface;
 use Untek\Model\Validator\Interfaces\ValidationByMetadataInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AccessEntity implements EntityIdInterface, ValidationByMetadataInterface
+class AccessEntity //implements EntityIdInterface, ValidationByMetadataInterface
 {
 
     private $id = null;
