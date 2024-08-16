@@ -2,6 +2,8 @@
 
 namespace Untek\Model\Validator\Interfaces;
 
+\Untek\Core\Code\Helpers\DeprecateHelper::hardThrow();
+
 interface ValidatorInterface
 {
 

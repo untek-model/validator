@@ -4,6 +4,8 @@ namespace Untek\Model\Validator\Entities;
 
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
+\Untek\Core\Code\Helpers\DeprecateHelper::hardThrow();
+
 class ValidationErrorEntity
 {
 

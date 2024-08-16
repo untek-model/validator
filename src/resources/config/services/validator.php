@@ -12,6 +12,8 @@ return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services()->defaults()->public()->autowire();
     $parameters = $configurator->parameters();
 
+    \Untek\Core\Code\Helpers\DeprecateHelper::hardThrow();
+
 //    $services->set(ValidatorBuilder::class, ValidatorBuilder::class);
     $services->alias(ValidatorInterface::class, ChainValidator::class);
     $services->set(ChainValidator::class)

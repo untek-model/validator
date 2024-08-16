@@ -8,6 +8,8 @@ use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Model\Validator\Entities\ValidationErrorEntity;
 use Untek\Model\Validator\Libs\Validators\ChainValidator;
 
+\Untek\Core\Code\Helpers\DeprecateHelper::hardThrow();
+
 class ValidationHelper
 {
 
